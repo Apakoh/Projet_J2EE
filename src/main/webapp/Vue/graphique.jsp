@@ -72,7 +72,7 @@
       
       
      <div id = "container" style = "width: 550px; height: 400px; margin-left: 80px;"></div>
-     <div id="piechart" style="width: 900px; height: 500px;margin-left: 50%;margin-top: -30%;"></div>
+     <div id="piechart" style="width: 900px; height: 500px;margin-left: 50%;margin-top: -10%;"></div>
      <div id = "container2" style = "width: 550px; height: 400px; margin-left: 30%;"></div>
 
 

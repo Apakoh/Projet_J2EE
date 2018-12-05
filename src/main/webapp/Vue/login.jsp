@@ -13,9 +13,9 @@
               <h1>Mini projet JEE</h1>
               <div class="login-page">
                   <div class="form">
-                    <form class="login-form">
-                      <input type="text" placeholder="Nom d'utilisateur"/>
-                      <input type="password" placeholder="Mot de passe"/>
+                    <form class="login-form" method="GET">
+                      <input name="identifiant" type="text" placeholder="Nom d'utilisateur"/>
+                      <input name="motDePasse" type="password" placeholder="Mot de passe"/>
                       <button>login</button>
                     </form>
                   </div>
