@@ -52,7 +52,7 @@ public class LoginControleur extends HttpServlet {
                 List<ClientEntity> clients = dao.customerLoginList();
                 for (ClientEntity c : clients)
                 {
-                    if(c.getEmail()==identifiant & c.getIdClient()==Integer.parseInt(motDePasse))
+                    if(c.getEmail().equals(identifiant) & c.getIdClient()==Integer.parseInt(motDePasse))
                     {
                         connexion = true;
                     }
