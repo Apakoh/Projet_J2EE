@@ -50,6 +50,11 @@ public class ClientEntity {
         this.creditLimit = creditLimit;
     }
 
+    public ClientEntity(int idClient, String Email) {
+        this.idClient = idClient;
+        this.Email = Email;
+    }
+
     public int getIdClient() {
         return idClient;
     }
