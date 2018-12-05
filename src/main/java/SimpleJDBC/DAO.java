@@ -54,6 +54,32 @@ public class DAO {
             }
         }
         
+        public List<ClientEntity> customerLoginList() throws DAOException {
+            List<ClientEntity> result = new LinkedList<>(); // Liste vIde
+
+            String sql = "SELECT CUSTOMER_ID,EMAIL FROM CUSTOMER";
+            try (Connection connection = myDataSource.getConnection();
+                    PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+                    try (ResultSet rs = stmt.executeQuery()) {
+                            while (rs.next()) {
+                                // On récupère les champs nécessaires de l'enregistrement courant
+                                int customerID = rs.getInt("CUSTOMER_ID");
+                                String email = rs.getString("EMAIL");
+                                // On crée l'objet entité
+                                ClientEntity c = new ClientEntity(customerID,email);
+                                // On l'ajoute à la liste des résultats
+                                result.add(c);
+                            }
+                    }
+            }  catch (SQLException ex) {
+                    Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+                    throw new DAOException(ex.getMessage());
+            }
+
+            return result;
+	}     
+        
         public List<OrdersEntity> OrdersListByCustomer(int customerNum) throws DAOException {
             List<OrdersEntity> result = new LinkedList<>(); // Liste vIde
 
