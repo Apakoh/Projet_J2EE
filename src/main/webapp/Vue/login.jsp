@@ -17,7 +17,7 @@
                         
                       <input name="identifiant" type="text" placeholder="Nom d'utilisateur"/>
                       <input name="motDePasse" type="password" placeholder="Mot de passe"/>
-                      <button type="submit" name="action">login</button>
+                      <button type="submit" name="action" value="login">login</button>
                     </form>
                   </div>
                 </div>
