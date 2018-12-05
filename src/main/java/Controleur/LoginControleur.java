@@ -23,7 +23,7 @@ import SimpleJDBC.ClientEntity;
  *
  * @author Spard
  */
-@WebServlet(name = "ControleurTauxRemise", urlPatterns = {"/ControleurTauxRemise"})
+@WebServlet(name = "loginControleur", urlPatterns = {"/login"})
 public class LoginControleur extends HttpServlet {
 
     /**
@@ -38,31 +38,38 @@ public class LoginControleur extends HttpServlet {
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
  
-        try {
             // Créér le ExtendedDAO avec sa source de données
             DAO dao = new DAO(DataSourceFactory.getDataSource());
             // Trouver la valeur du paramètre HTTP selectedState
             String identifiant = request.getParameter("identifiant");
             String motDePasse = request.getParameter("motDePasse");
-            boolean connexion = false;
+            String action = request.getParameter("action");
+            String connexion = "FAUX";
+            String pagejsp = "login";
             
-            if(identifiant!=null & motDePasse!=null){
-               
-            }
-                List<ClientEntity> clients = dao.customerLoginList();
-                for (ClientEntity c : clients)
-                {
-                    if(c.getEmail().equals(identifiant) & c.getIdClient()==Integer.parseInt(motDePasse))
-                    {
-                        connexion = true;
+            if(action!=null)
+            {
+                if(action.equals("login") & identifiant!=null & motDePasse!=null)
+                {               
+                    try{
+                        List<ClientEntity> clients = dao.customerLoginList();
+                        for (ClientEntity c : clients)
+                        {
+                            if(c.getEmail().equals(identifiant) & c.getIdClient()==Integer.parseInt(motDePasse))
+                            {
+                                connexion = "TRUE";
+                                pagejsp = "choixClient";
+                            }
+                        }
+                    } catch (DAOException ex) {
+                        Logger.getLogger("servlet").log(Level.SEVERE, "Erreur de traitement", ex);      
                     }
                 }
-                request.setAttribute("connexionValide", connexion);
-                // On continue vers la page JSP sélectionnée
-                request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
-            } catch (DAOException ex) {
-                Logger.getLogger("servlet").log(Level.SEVERE, "Erreur de traitement", ex);      
-        }
+            }
+            
+            request.setAttribute("connexionValide", connexion);
+            // On continue vers la page JSP sélectionnée
+            request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
