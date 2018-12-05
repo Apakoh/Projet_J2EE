@@ -14,9 +14,10 @@
               <div class="login-page">
                   <div class="form">
                     <form class="login-form" method="GET">
+                        
                       <input name="identifiant" type="text" placeholder="Nom d'utilisateur"/>
                       <input name="motDePasse" type="password" placeholder="Mot de passe"/>
-                      <button>login</button>
+                      <button type="submit" name="action">login</button>
                     </form>
                   </div>
                 </div>
