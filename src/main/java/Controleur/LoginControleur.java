@@ -18,13 +18,17 @@ import SimpleJDBC.DAOException;
 import SimpleJDBC.DataSourceFactory;
 import SimpleJDBC.DAO;
 import SimpleJDBC.ClientEntity;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Spard
  */
-@WebServlet(name = "loginControleur", urlPatterns = {"/login"})
+@WebServlet(name = "LoginControleur", urlPatterns = {"/LoginControleur"})
 public class LoginControleur extends HttpServlet {
+    
+    
+    private boolean connecte = false;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,42 +40,73 @@ public class LoginControleur extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
+        throws ServletException, IOException, DAOException {
  
+            String pagejsp;
             // Créér le ExtendedDAO avec sa source de données
             DAO dao = new DAO(DataSourceFactory.getDataSource());
             // Trouver la valeur du paramètre HTTP selectedState
-            String identifiant = request.getParameter("identifiant");
-            String motDePasse = request.getParameter("motDePasse");
-            String action = request.getParameter("action");
-            String connexion = "FAUX";
-            String pagejsp = "login";
-            
-            if(action!=null)
+            request.setCharacterEncoding("UTF-8");
+            HttpSession session = request.getSession();
+
+            if(actionIs(request,"login"))
             {
-                if(action.equals("login") & identifiant!=null & motDePasse!=null)
-                {               
-                    try{
-                        List<ClientEntity> clients = dao.customerLoginList();
-                        for (ClientEntity c : clients)
-                        {
-                            if(c.getEmail().equals(identifiant) & c.getIdClient()==Integer.parseInt(motDePasse))
+                this.connecte = true;
+                String identifiant = request.getParameter("identifiant");
+                String motDePasse = request.getParameter("motDePasse");
+                String action = request.getParameter("action");
+                pagejsp = "login";
+                
+                if(action!=null)
+                {
+                    if(action.equals("login") & identifiant!=null & motDePasse!=null)
+                    {               
+                        try{
+                            List<ClientEntity> clients = dao.customerLoginList();
+                            for (ClientEntity c : clients)
                             {
-                                connexion = "TRUE";
-                                pagejsp = "choixClient";
+                                if(c.getEmail().equals(identifiant) & c.getIdClient()==Integer.parseInt(motDePasse))
+                                {
+                                    pagejsp = "choixClient";
+                                    session.setAttribute("id", motDePasse);
+                                }
                             }
+                        } catch (DAOException ex) {
+                            Logger.getLogger("servlet").log(Level.SEVERE, "Erreur de traitement", ex);      
                         }
-                    } catch (DAOException ex) {
-                        Logger.getLogger("servlet").log(Level.SEVERE, "Erreur de traitement", ex);      
                     }
                 }
+
+                // On continue vers la page JSP sélectionnée
+                request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
+            } else if(actionIs(request,"Accéder à mes infos personnelles") || actionIs(request,"Accéder à mes bons de commandes"))
+            {
+              String choix = request.getParameter("action");
+              pagejsp = "choixClient";
+
+              if(choix!=null)
+              {
+                  //ClientEntity client = dao.customer(1);
+                  if("Accéder à mes infos personnelles".equals(choix))
+                  {
+                      pagejsp="editionInfos";
+                      //request.setAttribute("client", client);
+                  }
+                  else
+                      pagejsp="editionCommandes";
+              }
+
+              // On continue vers la page JSP sélectionnée
+              request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
+            } else {if(this.connecte==false)
+                request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
             }
-            
-            request.setAttribute("connexionValide", connexion);
-            // On continue vers la page JSP sélectionnée
-            request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
     }
 
+    private boolean actionIs(HttpServletRequest request, String action) {
+	return action.equals(request.getParameter("action"));
+    }    
+        
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -84,7 +119,11 @@ public class LoginControleur extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DAOException ex) {
+            Logger.getLogger(LoginControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
  
     /**
@@ -98,7 +137,11 @@ public class LoginControleur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (DAOException ex) {
+            Logger.getLogger(LoginControleur.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
  
     /**

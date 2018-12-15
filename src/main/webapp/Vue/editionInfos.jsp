@@ -15,19 +15,19 @@
                     <table border="1">
                             <tbody>                     
                                     <tr>
-                                        Nom :
+                                        Nom :       <input name="nom" type="text" placeholder=${client.Nom}/>
                                         <br>
-                                        Adresse :
+                                        Adresse :       <input name="adresse" type="text" placeholder=${client.AdresseLine1}/>
                                         <br>
-                                        Ville :
+                                        Ville :       <input name="ville" type="text" placeholder=${client.City}/>
                                         <br>
-                                        Etat :
+                                        Etat :       <input name="etat" type="text" placeholder=${client.State}/>
                                         <br>
-                                        Téléphone :
+                                        Téléphone :       <input name="telephone" type="text" placeholder=${client.Telephone}/>
                                         <br>
-                                        Fax :
+                                        Fax :       <input name="nom" type="fax" placeholder=${client.Fax}/>
                                         <br>
-                                        Email :
+                                        Email :       <input name="nom" type="email" placeholder=${client.Email}/>
                                         <br>
                                     </tr>
                             </tbody>

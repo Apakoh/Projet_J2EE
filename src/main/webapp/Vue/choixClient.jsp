@@ -9,14 +9,16 @@
             <title>Choix de l'action</title>
     </head>
     <body>
-
+            
+            <form method="GET">
                 <div class="boutonI">
-                   <input type="submit" id="submit" name="submit" value="Accéder à mes infos personnelles">
+                   <input type="submit" id="submit" name="action" value="Accéder à mes infos personnelles">
                 </div><!--boutonI-->
 
                 <div class="boutonC">
-                   <input type="submit" id="submit" name="submit" value="Accéder à mes bons de commandes">
+                   <input type="submit" id="submit" name="action" value="Accéder à mes bons de commandes">
                 </div><!--boutonC-->
+            </form>   
     </body>
     
   <style type="text/css">

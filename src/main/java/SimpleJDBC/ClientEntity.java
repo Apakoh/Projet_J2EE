@@ -54,6 +54,16 @@ public class ClientEntity {
         this.idClient = idClient;
         this.Email = Email;
     }
+    
+    public ClientEntity(int idClient, String adresse, String ville, String etat, String tel, String fax, String Email) {
+        this.idClient = idClient;
+        this.AdresseLine1 = adresse;
+        this.City = ville;
+        this.State = etat;
+        this.Telephone = tel;
+        this.Fax = fax;
+        this.Email = Email;
+    }
 
     public int getIdClient() {
         return idClient;
