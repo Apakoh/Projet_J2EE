@@ -8,7 +8,7 @@
     </head>
     <body>
 
-            <h2>Mes bons de commandes</h2>
+            <h1>Mes bons de commandes</h1>
 
             <form method="POST">
                 <div>
@@ -47,20 +47,78 @@
                                             <td>
                                                 ${bonCommande.getCompagnyName()}
                                             </td>
-                                            <td>
+                                            <td class="modifier">
                                                 <a href="?action=DELETE&code=${discountCode.code}">Modifier</a>
                                             </td>
-                                            <td>
+                                            <td class="modifier">
                                                 <a href="?action=DELETE&code=${discountCode.code}">Delete</a>
                                             </td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>
                         </table>
-                </div>        
-                <button name="action" value="retourChoix" class="button">Retour</button>
-                <button name="action" style="width:170px" value="deconnexion" class="button">Déconnexion</button>
+                </div>   
+                <div class="button2">
+                    <button name="action" value="retourChoix" class="button">Retour</button>
+                    <button name="action" style="width:170px" value="deconnexion" class="button">Déconnexion</button>
+                </div>
             </form>
 
     </body>
+    
+    <style type="text/css">
+
+        body{
+             background:#2980b9;
+             font-family:Arial, Helvetica, sans-serif;
+             font-size:20px;
+        }
+            
+        h1{
+           color: white;
+           font-size: 50px;
+           text-align: center;
+        }
+        
+        table {
+               background: white;
+               font-family: arial, sans-serif;
+               border-collapse: collapse;
+               width: 80%;
+               margin : auto;
+          }
+            
+        td, th {
+                text-align: center;
+          }
+            
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        
+        .modifier{
+            background:#e67e22;
+        }
+        
+        .button{
+            font:bold 18px Arial;
+            background:#34495e;
+            color:white;
+            width:165px;
+            height: 55px;
+            border:none;
+            cursor: pointer;
+        }
+        
+        .button2{
+            width: 30%;
+            margin: auto;
+            padding-top: 65px;
+        }
+        
+        .button:hover{
+          background: #e67e22;
+        }
+            
+    </style>
 </html>

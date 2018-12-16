@@ -19,8 +19,8 @@
                    <input type="submit" id="submit" name="action" value="Accéder à mes bons de commandes">
                 </div><!--boutonC-->
                 
-                <div class="boutonC">
-                <button name="action" style="width:170px" value="deconnexion"> Déconnexion </button>
+                <div class="boutonD">
+                    <button name="action" value="deconnexion" class="deconnexion"> Déconnexion </button>
                 </div>
             </form>   
     </body>
@@ -44,6 +44,14 @@
         }
 
         .boutonC{
+            width: 250px;
+            margin : auto;
+            margin-bottom: 10%;
+            left: 50%;
+            top: 50%;
+        }
+        
+        .boutonD{
             width: 250px;
             margin : auto;
             margin-bottom: 10%;
@@ -81,6 +89,18 @@
 
         .boutonC input:hover{
           background: #e67e22;
+        }
+        
+        .deconnexion{
+            font:bold 18px Arial;
+            background:#e67e22;
+            color:white;
+            width:300px;
+            height: 60px;
+            border:none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-left: 20px;
         }
 
 
