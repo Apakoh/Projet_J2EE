@@ -3,6 +3,7 @@ package Tests;
 import SimpleJDBC.ClientEntity;
 import SimpleJDBC.DAO;
 import SimpleJDBC.DAOException;
+import SimpleJDBC.OrdersEntity;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -29,7 +30,7 @@ public class DAOTest {
 		// On crée le schema de la base de test
 		executeSQLScript(myConnection, "schema.sql");
 		// On y met des données
-		executeSQLScript(myConnection, "smalltestdata.sql");		
+		executeSQLScript(myConnection, "bigtestdata.sql");		
 		
 		myDAO = new DAO(myDataSource);
 	}
@@ -78,6 +79,20 @@ public class DAOTest {
                     String email = "jumboeagle@example.com";
                     ClientEntity clientModifie = new ClientEntity(idClient,nom,adresse,ville,etat,telephone,fax,email);
                     int result = myDAO.editClientData(clientModifie);
+		assertEquals(1, result);
+	}
+        
+        	/**
+	 * Test of testEditionClient method, of class DAO.
+	 * @throws SimpleJDBC.DAOException
+	 */
+	@Test
+	public void testEditionOrder() throws DAOException {
+		    int id = 10398001;
+                    int pid = 980001;
+                    int quantite = 1;
+                    OrdersEntity order = new OrdersEntity(id,pid,quantite);
+                    int result = myDAO.editClientOrder(order);
 		assertEquals(1, result);
 	}
         

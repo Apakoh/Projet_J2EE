@@ -160,7 +160,7 @@ public class DAO {
             }   
         }
         
-        public void editClientOrder(OrdersEntity ord){
+        public int editClientOrder(OrdersEntity ord){
             String sql = "UPDATE PURCHASE_ORDER SET PRODUCT_ID = ?, QUANTITY = ? WHERE ORDER_NUM = ?";
             try (   Connection connection = myDataSource.getConnection();
                     PreparedStatement stmt = connection.prepareStatement(sql)
@@ -170,11 +170,13 @@ public class DAO {
                     stmt.setInt(1, ord.getProductID());
                     stmt.setInt(2, ord.getQuantite());
                     stmt.setInt(3, ord.getOrderNum());
-                    stmt.executeUpdate();
+                    return stmt.executeUpdate();
 
             }  catch (SQLException ex) {
                 System.out.println("Erreur : " + ex.getMessage());
             }
+            
+            return 0;
         }
         
         public void deleteClientOrder(int orderNum) throws SQLException {

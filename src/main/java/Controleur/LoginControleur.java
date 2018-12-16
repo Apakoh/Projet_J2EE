@@ -151,6 +151,25 @@ public class LoginControleur extends HttpServlet {
                 session.invalidate();
                 request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
                 
+            }else if(actionIs(request,"modifierBons")){                
+                
+                String modifier = request.getParameter("action");
+                pagejsp = "editionCommandes";
+                int idClient = Integer.parseInt(session.getAttribute("id").toString());
+                if("modifierBons".equals(modifier)){
+                    int id = Integer.parseInt(request.getParameter("id"));
+                    int pid = Integer.parseInt(request.getParameter("pid"));
+                    int quantite = Integer.parseInt(request.getParameter("quantite"));
+                    
+                    OrdersEntity oe = new OrdersEntity(id,pid,quantite);
+                    dao.editClientOrder(oe);
+                    
+                    List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
+                    request.setAttribute("bonCommandes", bons);
+                }
+                
+                request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
+                
             }else {if(this.connecte==false)
                 request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
             }

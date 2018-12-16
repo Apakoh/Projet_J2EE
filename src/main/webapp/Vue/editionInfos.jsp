@@ -7,42 +7,44 @@
             <title>Edition données personnelles</title>
     </head>
     <body>
+        
+        <h2 id="banner">Mon Profil</h2>
+        
         <form method="POST">
             <div class="recuadro">
                 <div class="contenu">
-                    <div id="banner"> Mon Profil </div>
                     <table>
                         <tr>
                             <td>
                                 <div id="nav">
                                     <table>
                                         <tr class="d0">
-                                            <td> Nom : </td>
-                                            <td> <input size="35%" size="30" name="nom" type="text" value="${client.getNom()}" /> </td>
+                                            <td class="d0"> Nom : </td>
+                                            <td> <input name="nom" type="text" value="${client.getNom()}" /> </td>
                                         </tr>
                                         <tr class="d1">
-                                            <td> Adresse : </td>
-                                            <td> <input size="35%" name="adresse" type="text" value="${client.getAdresseLine1()}" /> </td>
+                                            <td class="d0"> Adresse : </td>
+                                            <td> <input name="adresse" type="text" value="${client.getAdresseLine1()}" /> </td>
                                         </tr>
                                         <tr class="d0">
-                                            <td> Ville : </td>
-                                            <td> <input size="35%" name="ville" type="text" value="${client.getCity()}" /> </td>
+                                            <td class="d0"> Ville : </td>
+                                            <td> <input name="ville" type="text" value="${client.getCity()}" /> </td>
                                         </tr>
                                         <tr class="d1">
-                                            <td> Etat : </td>
-                                            <td> <input size="35%" name="etat" type="text" value="${client.getState()}" /> </td>
+                                            <td class="d0"> Etat : </td>
+                                            <td> <input name="etat" type="text" value="${client.getState()}" /> </td>
                                         </tr>
                                         <tr class="d0">
-                                            <td> Téléphone : </td>
-                                            <td> <input size="35%" name="telephone" type="text" value="${client.getTelephone()}" /> </td>
+                                            <td class="d0"> Téléphone : </td>
+                                            <td> <input name="telephone" type="text" value="${client.getTelephone()}" /> </td>
                                         </tr>
                                         <tr class="d1">
-                                            <td> Fax : </td>
-                                            <td> <input size="35%" name="fax" type="fax" value="${client.getFax()}" /> </td>
+                                            <td class="d0"> Fax : </td>
+                                            <td> <input name="fax" type="fax" value="${client.getFax()}" /> </td>
                                         </tr>
                                         <tr class="d0">
-                                            <td> Email : </td>
-                                            <td> <input size="35%" name="email" type="email" value="${client.getEmail()}" /> </td>
+                                            <td class="d0"> Email : </td>
+                                            <td> <input name="email" type="email" value="${client.getEmail()}" /> </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -50,14 +52,25 @@
                         </tr>
                     </table>
                 </div>
-            </div>             
-            <button name="action" value="modifierProfil" class="button">Modifier</button>
-            <button name="action" value="retourChoix" class="button">Retour</button>            
-            <button name="action" style="width:170px" value="deconnexion" class="button">Déconnexion</button>
+                <table>
+                    <tr>
+                        <td>
+                            <button class="b1" name="action" value="modifierProfil" class="button">Modifier</button>   
+                        </td>
+                        <td>
+                            <button class="b1" name="action" value="retourChoix" class="button">Retour</button>
+                        </td>
+                        <td>
+                            <button class="b1" name="action" value="deconnexion" class="button">Déconnexion</button>
+                        </td>
+                     </tr>
+                </table>  
+            </div>
         </form>
     </body>
 
-    <style type="text/css">
+     </body>    
+        <style type="text/css">
           
         html, body, div, span, applet, object, iframe,
         h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -104,45 +117,55 @@
 
         .recuadro{
             width: 50%;
-            height: 30%;
-            margin-top: 10%;
-            margin-left: 25%;
-            background-color: white;
-            border-radius: 40px;
-            padding-bottom: 5%;
+            margin: auto;
+            background-color: white;            
+            min-width: 21em;
+            max-width: 21em;
+            padding: 1em;
         }
 
-        .contenu{
-            padding-left: 25%;
-            padding-top: 10%;
+        .contenu{            
+            padding: auto;
             width: 100%;
         }
 
-         .button {
+         button.b1 {
           font-family: "Roboto", sans-serif;
           text-transform: uppercase;
           background: #34495e;
           width: 100%;
           border: 0;
-          padding: 15px;
+          padding: 0.8em;
           color: #FFFFFF;
           font-size: 18px;
           cursor: pointer;
-          margin-top: 60px;
-          margin-left: 46%;
-          width: 115px;
         }
-        .button:hover,.button:active,.button:focus {
+        button.b1:hover,.button:active,.button:focus {
+          background: #e67e22;
+        }
+        
+        button.b0 {
+          font-family: "Roboto", sans-serif;
+          background: #34495e;
+          width: 100%;
+          border: 0;
+          padding: 1em;
+          color: #FFFFFF;
+          cursor: pointer;
+        }
+        
+        button.b0:hover,.button:active,.button:focus {
           background: #e67e22;
         }
         
         #banner {
-             margin-left: 15%;
+             margin-top: 10%;
+             padding-bottom: 3%;
         }
         
         #nav {
             background-color: #FFFFFF;
-            align-content: center;
+            padding: auto;
         }
         
         tr.d0 {
@@ -153,14 +176,28 @@
             background-color: #FFFFFF;
         }
         
+        td.d0 {
+            padding: 3px;
+            margin: 3px;
+            width: 6em;
+        }
+        
         td {
             padding: 3px;
             margin: 3px;
+            height: 1.2em;
+        }
+        
+        th {
+            padding: auto;
+            min-width: 5em;
         }
         
         input {
             background-color: transparent;
-            border: none transparent;            
+            border: none transparent;
+            display: table-cell;
+            width: 100%;
         }
         
         input:focus {
@@ -183,6 +220,9 @@
         
         table {
             border: none transparent;
+            width: 100%;
+            min-width: 11em;
+            max-width: 21em;
         }
 
         </style>
