@@ -18,6 +18,7 @@ import SimpleJDBC.DAOException;
 import SimpleJDBC.DataSourceFactory;
 import SimpleJDBC.DAO;
 import SimpleJDBC.ClientEntity;
+import SimpleJDBC.OrdersEntity;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -60,19 +61,30 @@ public class LoginControleur extends HttpServlet {
                 if(action!=null)
                 {
                     if(action.equals("login") & identifiant!=null & motDePasse!=null)
-                    {               
-                        try{
+                    {
+                        if("admin".equals(identifiant) & "admin".equals(motDePasse)){
+                            pagejsp = "graphique";
+                            session.setAttribute("id", "admin");
+                        }else{
+                            int mdp = 0;
+                            try{
+                                mdp = Integer.parseInt(motDePasse);
+                            } catch(NumberFormatException e){
+                                
+                            }
+                            try{
                             List<ClientEntity> clients = dao.customerLoginList();
                             for (ClientEntity c : clients)
                             {
-                                if(c.getEmail().equals(identifiant) & c.getIdClient()==Integer.parseInt(motDePasse))
+                                if(c.getEmail().equals(identifiant) & c.getIdClient()==mdp)
                                 {
                                     pagejsp = "choixClient";
                                     session.setAttribute("id", motDePasse);
                                 }
                             }
-                        } catch (DAOException ex) {
-                            Logger.getLogger("servlet").log(Level.SEVERE, "Erreur de traitement", ex);      
+                            } catch (DAOException ex) {
+                                Logger.getLogger("servlet").log(Level.SEVERE, "Erreur de traitement", ex);
+                            }
                         }
                     }
                 }
@@ -81,24 +93,65 @@ public class LoginControleur extends HttpServlet {
                 request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
             } else if(actionIs(request,"Accéder à mes infos personnelles") || actionIs(request,"Accéder à mes bons de commandes"))
             {
-              String choix = request.getParameter("action");
-              pagejsp = "choixClient";
+                String choix = request.getParameter("action");
+                pagejsp = "choixClient";
 
-              if(choix!=null)
-              {
-                  //ClientEntity client = dao.customer(1);
-                  if("Accéder à mes infos personnelles".equals(choix))
-                  {
-                      pagejsp="editionInfos";
-                      //request.setAttribute("client", client);
-                  }
-                  else
-                      pagejsp="editionCommandes";
-              }
+                if(choix!=null)
+                {
+                    int idClient = Integer.parseInt(session.getAttribute("id").toString());
+
+                    if("Accéder à mes infos personnelles".equals(choix))
+                    {
+                        ClientEntity client = dao.customer(1);
+                        pagejsp="editionInfos";
+                        request.setAttribute("client", client);
+                    }
+                    else
+                    {
+                        List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
+                        pagejsp="editionCommandes";
+                        request.setAttribute("bonCommandes", bons);
+                    }
+                }
 
               // On continue vers la page JSP sélectionnée
               request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
-            } else {if(this.connecte==false)
+            }else if(actionIs(request,"modifierProfil"))
+            {
+                String modifier = request.getParameter("action");
+                pagejsp = "editionInfos";
+                int idClient = Integer.parseInt(session.getAttribute("id").toString());
+                
+                if("modifierProfil".equals(modifier))
+                {
+                    String nom = request.getParameter("nom");
+                    String adresse = request.getParameter("adresse");
+                    String ville = request.getParameter("ville");
+                    String etat = request.getParameter("etat");
+                    String telephone = request.getParameter("telephone");
+                    String fax = request.getParameter("fax");
+                    String email = request.getParameter("email");
+                    ClientEntity clientModifie = new ClientEntity(idClient,nom,adresse,ville,etat,telephone,fax,email);
+                    dao.editClientData(clientModifie);
+                    
+                }
+                
+                ClientEntity client = dao.customer(idClient);
+                request.setAttribute("client", client);
+                
+                // On continue vers la page JSP sélectionnée
+                request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
+            }else if(actionIs(request,"retourChoix")){
+                
+                pagejsp = "choixClient";
+                request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
+                
+            }else if(actionIs(request,"deconnexion")){                
+                this.connecte = false;
+                session.invalidate();
+                request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
+                
+            }else {if(this.connecte==false)
                 request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
             }
     }

@@ -26,32 +26,26 @@ public class DAO {
 		this.myDataSource = dataSource;
 	}
         
-        public void editClientData(ClientEntity cl) {
-            String sql = "UPDATE CUSTOMER SET DISCOUNT_CODE = ?, ZIP = ?, NAME = ?, ADDRESSLINE1 = ?, ADDRESSLINE2 = ?, CITY = ?, STATE = ?, PHONE = ?, FAX = ?, EMAIL = ?, CREDIT_LIMIT = ? WHERE CUSTOMER_ID = ?";
+        public int editClientData(ClientEntity cl) throws DAOException{
+            String sql = "UPDATE CUSTOMER SET NAME = ?, ADDRESSLINE1 = ?, CITY = ?, STATE = ?, PHONE = ?, FAX = ?, EMAIL = ? WHERE CUSTOMER_ID = ?";
             try (   Connection connection = myDataSource.getConnection();
-                    PreparedStatement stmt = connection.prepareStatement(sql)
-            ) {
-                    // Nom + Prénom du client
-                    String nomComplet = cl.getNom()+" "+cl.getPrenom();
-                    
-                    // Définir la valeur du paramètre
-                    stmt.setInt(1, cl.getDiscountCode());
-                    stmt.setString(2, cl.getZip());
-                    stmt.setString(3, nomComplet);
-                    stmt.setString(4, cl.getAdresseLine1());
-                    stmt.setString(5, cl.getAdresseLine2());
-                    stmt.setString(6, cl.getCity());
-                    stmt.setString(7, cl.getState());
-                    stmt.setString(8, cl.getTelephone());
-                    stmt.setString(9, cl.getFax());
-                    stmt.setString(10, cl.getEmail());
-                    stmt.setInt(11, cl.getCreditLimit());
-                    stmt.setInt(12, cl.getIdClient());
-                    stmt.executeUpdate();
+                    PreparedStatement stmt = connection.prepareStatement(sql)) {
+                   
+                    // Définir la valeur des paramètres
+                    stmt.setString(1, cl.getNom());
+                    stmt.setString(2, cl.getAdresseLine1());
+                    stmt.setString(3, cl.getCity());
+                    stmt.setString(4, cl.getState());
+                    stmt.setString(5, cl.getTelephone());
+                    stmt.setString(6, cl.getFax());
+                    stmt.setString(7, cl.getEmail());
+                    stmt.setInt(8, cl.getIdClient());
+                    return stmt.executeUpdate();
 
             }  catch (SQLException ex) {
                 System.out.println("Erreur : " + ex.getMessage());
             }
+            return 0;
         }
         
         public List<ClientEntity> customerLoginList() throws DAOException {
@@ -80,36 +74,36 @@ public class DAO {
             return result;
 	}
         
-        public ClientEntity customer(int id) throws DAOException {
-            
-            String sql = "SELECT * FROM CUSTOMER WHERE CUSTOMER_ID=?";
-            ClientEntity c = null;
-            try (Connection connection = myDataSource.getConnection();
-                    PreparedStatement stmt = connection.prepareStatement(sql)) {
-                    stmt.setInt(1, id);
-                    try (ResultSet rs = stmt.executeQuery()) {
-                            if (rs.next()) {
-                                // On récupère les champs nécessaires de l'enregistrement courant
-                                int customerID = rs.getInt("CUSTOMER_ID");
-                                String adresse = rs.getString("ADDRESSLINE1");
-                                String ville = rs.getString("CITY");
-                                String etat = rs.getString("STATE");
-                                String tel = rs.getString("PHONE");
-                                String fax = rs.getString("FAX");
-                                String email = rs.getString("EMAIL");
-                                
-                                // On crée l'objet entité
-                                c = new ClientEntity(customerID,adresse,ville,etat,tel,fax,email);
-                                // On l'ajoute à la liste des résultats
-                            }
-                    }
-            }  catch (SQLException ex) {
-                    Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
-                    throw new DAOException(ex.getMessage());
-            }
+    public ClientEntity customer(int id) throws DAOException {
 
-            return c;
-	}
+        ClientEntity result = null;
+
+        String sql = "SELECT * FROM CUSTOMER WHERE CUSTOMER_ID = ?";
+        try (Connection connection = myDataSource.getConnection(); // On crée un statement pour exécuter une requête
+                PreparedStatement stmt = connection.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) { // On a trouvé
+                    int idClient = id;
+                    String nom = rs.getString("NAME");
+                    String adresse = rs.getString("ADDRESSLINE1");
+                    String ville = rs.getString("CITY");
+                    String etat = rs.getString("STATE");
+                    String tel = rs.getString("PHONE");
+                    String fax = rs.getString("FAX");
+                    String email = rs.getString("EMAIL");
+
+                    // On crée l'objet "entity"
+                    result = new ClientEntity(idClient,nom, adresse, ville, etat, tel, fax, email);
+                } // else on n'a pas trouvé, on renverra null
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger("DAO").log(Level.SEVERE, null, ex);
+            throw new DAOException(ex.getMessage());
+        }
+        return result;
+    }
         
         public List<OrdersEntity> OrdersListByCustomer(int customerNum) throws DAOException {
             List<OrdersEntity> result = new LinkedList<>(); // Liste vIde

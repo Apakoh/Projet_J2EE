@@ -10,54 +10,57 @@
 
             <h2>Mes bons de commandes</h2>
 
-
-            <div>
-                    <table border="1">
-                            <tbody>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Nom</th>
-                                    <th>Quantité</th>
-                                    <th>Prix Livraison</th>
-                                    <th>Date</th>
-                                    <th>Date de Livraison</th>
-                                    <th>Fournisseur</th>
-                                </tr>             
-                                
-                                <!--c:forEach var="discountCode" items="${discountCodes}">-->
+            <form method="GET">
+                <div>
+                        <table border="1">
+                                <tbody>
                                     <tr>
-                                        <td>
-                                            oui
-                                        </td>
-                                        <td>
-                                            oui
-                                        </td>
-                                        <td>
-                                            oui
-                                        </td>
-                                        <td>
-                                            oui
-                                        </td>
-                                        <td>
-                                            oui
-                                        </td>
-                                        <td>
-                                            oui
-                                        </td>
-                                        <td>
-                                            oui
-                                        </td>
-                                        <td>
-                                            <a href="?action=DELETE&code=${discountCode.code}">Modifier</a>
-                                        </td>
-                                        <td>
-                                            <a href="?action=DELETE&code=${discountCode.code}">Delete</a>
-                                        </td>
-                                    </tr>
-                                <!--/c:forEach-->
-                            </tbody>
-                    </table>
-            </div>
+                                        <th>ID</th>
+                                        <th>Nom</th>
+                                        <th>Quantité</th>
+                                        <th>Prix Livraison</th>
+                                        <th>Date</th>
+                                        <th>Date de Livraison</th>
+                                        <th>Fournisseur</th>
+                                    </tr>             
+
+                                    <c:forEach var="bonCommande" items="${bonCommandes}">
+                                        <tr>
+                                            <td>
+                                                ${bonCommande.getOrderNum()}
+                                            </td>
+                                            <td>
+                                                ${bonCommande.getProductID()}
+                                            </td>
+                                            <td>
+                                                ${bonCommande.getQuantite()}
+                                            </td>
+                                            <td>
+                                                ${bonCommande.getShippingCost()}
+                                            </td>
+                                            <td>
+                                                ${bonCommande.getSalesDate()}
+                                            </td>
+                                            <td>
+                                                ${bonCommande.getShippingDate()}
+                                            </td>
+                                            <td>
+                                                ${bonCommande.getCompagnyName()}
+                                            </td>
+                                            <td>
+                                                <a href="?action=DELETE&code=${discountCode.code}">Modifier</a>
+                                            </td>
+                                            <td>
+                                                <a href="?action=DELETE&code=${discountCode.code}">Delete</a>
+                                            </td>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                        </table>
+                </div>        
+                <button name="action" value="retourChoix" class="button">Retour</button>
+                <button name="action" style="width:170px" value="deconnexion" class="button">Déconnexion</button>
+            </form>
 
     </body>
 </html>

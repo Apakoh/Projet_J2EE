@@ -18,6 +18,10 @@
                 <div class="boutonC">
                    <input type="submit" id="submit" name="action" value="Accéder à mes bons de commandes">
                 </div><!--boutonC-->
+                
+                <div class="boutonC">
+                <button name="action" style="width:170px" value="deconnexion"> Déconnexion </button>
+                </div>
             </form>   
     </body>
     
