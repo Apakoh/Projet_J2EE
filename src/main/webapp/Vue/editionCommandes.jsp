@@ -10,7 +10,7 @@
 
             <h2>Mes bons de commandes</h2>
 
-            <form method="GET">
+            <form method="POST">
                 <div>
                         <table border="1">
                                 <tbody>

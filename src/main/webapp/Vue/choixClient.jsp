@@ -10,7 +10,7 @@
     </head>
     <body>
             
-            <form method="GET">
+            <form method="POST">
                 <div class="boutonI">
                    <input type="submit" id="submit" name="action" value="Accéder à mes infos personnelles">
                 </div><!--boutonI-->

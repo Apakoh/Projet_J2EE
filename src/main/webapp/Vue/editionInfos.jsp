@@ -7,7 +7,7 @@
             <title>Edition données personnelles</title>
     </head>
     <body>
-        <form method="GET">
+        <form method="POST">
             <div class="recuadro">
                 <div class="contenu">
                     <div id="banner"> Mon Profil </div>

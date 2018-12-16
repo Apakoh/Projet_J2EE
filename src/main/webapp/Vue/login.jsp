@@ -13,8 +13,7 @@
               <h1>Mini projet JEE</h1>
               <div class="login-page">
                   <div class="form">
-                    <form class="login-form" method="GET">
-                        
+                    <form class="login-form" method="POST">                        
                       <input name="identifiant" type="text" placeholder="Nom d'utilisateur"/>
                       <input name="motDePasse" type="password" placeholder="Mot de passe"/>
                       <button type="submit" name="action" value="login">login</button>
