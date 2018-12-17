@@ -14,7 +14,7 @@
     </welcome-file-list>    
     <listener>  
         <listener-class>
-            com.deadcoderising.ExampleContextListener
+            com.deadcoderising.DatabaseInitializer
         </listener-class>
     </listener> 
 </web-app>
