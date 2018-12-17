@@ -11,5 +11,10 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>LoginControleur</welcome-file>
-    </welcome-file-list> 
+    </welcome-file-list>    
+    <listener>  
+        <listener-class>
+            com.deadcoderising.ExampleContextListener
+        </listener-class>
+    </listener> 
 </web-app>
