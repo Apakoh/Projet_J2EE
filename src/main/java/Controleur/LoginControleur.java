@@ -102,7 +102,7 @@ public class LoginControleur extends HttpServlet {
 
                     if("Accéder à mes infos personnelles".equals(choix))
                     {
-                        ClientEntity client = dao.customer(1);
+                        ClientEntity client = dao.customer(idClient);
                         pagejsp="editionInfos";
                         request.setAttribute("client", client);
                     }
