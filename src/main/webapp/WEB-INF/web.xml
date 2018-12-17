@@ -11,10 +11,5 @@
     </session-config>
     <welcome-file-list>
         <welcome-file>LoginControleur</welcome-file>
-    </welcome-file-list>    
-    <listener>  
-        <listener-class>
-            com.deadcoderising.DatabaseInitializer
-        </listener-class>
-    </listener> 
+    </welcome-file-list>
 </web-app>
