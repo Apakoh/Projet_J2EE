@@ -11,6 +11,7 @@
    
    <body>
        
+      <h2>Statistiques</h2>
       
       <script language = "JavaScript">
          function drawChart1() {
@@ -72,9 +73,38 @@
       
       
      <div id = "container" style = "width: 550px; height: 400px; margin-left: 80px;"></div>
-     <div id="piechart" style="width: 900px; height: 500px;margin-left: 50%;margin-top: -10%;"></div>
-     <div id = "container2" style = "width: 550px; height: 400px; margin-left: 30%;"></div>
+     <div id="piechart" style="width: 900px; height: 500px;margin-left: 50%;margin-top: -30%;"></div>
+     <div id = "container2" style = "width: 550px; height: 400px; margin-left: 7%;"></div>
+     <div class="bouton">
+         <button name="action" value="deconnexion" class="edition">Consulter mes produits</button>
+     </div>
 
 
    </body>
+   
+   <style type="text/css">
+
+   h2{
+          color: black;
+          font-size: 50px;
+          text-align: center;
+        }
+        
+    .edition{
+            font:bold 20px Arial;
+            background: #34495e;
+            color: white;
+            width: 300px;
+            height: 115px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-left: 63%;
+            margin-top: -20%;
+        }
+        
+     .edition:hover{
+          background: #e67e22;
+        }
+    </style>
 </html>
