@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -283,21 +284,20 @@ public class DAO {
             return result;
 	}
         
-        public Double turnoverByCategory(String codeProduct, Date dateDebut, Date dateFin){
-            double result = 0.00 ;
-            String sql = "SELECT SUM(pu.QUANTITY*pu.SHIPPING_COST) AS CA FROM PRODUCT po, PURCHASE_ORDER pu WHERE po.PRODUCT_CODE = ? AND pu.SALES_DATE >= ? AND pu.SALES_DATE <= ? " ;
+        public List turnoverByCategory(String dateDebut, String dateFin){
+            List result = new ArrayList<>();
             
-            try (   Connection connection = myDataSource.getConnection();
-                    PreparedStatement stmt = connection.prepareStatement(sql);
-                    ResultSet rs = stmt.executeQuery(sql)
-            ) {
+            String sql = "SELECT PRODUCT_CODE,SUM((PURCHASE_COST*QUANTITY)+SHIPPING_COST) FROM PRODUCT po, PURCHASE_ORDER pu WHERE po.PRODUCT_ID = pu.PRODUCT_ID AND pu.SALES_DATE >= ? AND pu.SALES_DATE <= ? GROUP BY po.PRODUCT_CODE" ;
+            try (Connection connection = myDataSource.getConnection();
+                    PreparedStatement stmt = connection.prepareStatement(sql)) {
+                
                     // Définir la valeur du paramètre
-                    stmt.setString(1, codeProduct);
-                    stmt.setDate(2, dateDebut);
-                    stmt.setDate(3, dateFin);
-                    stmt.executeUpdate();
-                    if (rs.next()) {
-                        result = rs.getInt("CA");
+                    stmt.setString(1, dateDebut);
+                    stmt.setString(2, dateFin);
+                    try (ResultSet rs = stmt.executeQuery()) {
+                            while (rs.next()) {
+                                result.add(rs);
+                            }
                     }
 
             }  catch (SQLException ex) {
@@ -307,21 +307,20 @@ public class DAO {
             return result ;
         }
         
-        public Double turnoverByState(String state, Date dateDebut, Date dateFin){
-            double result = 0.00 ;
-            String sql = "SELECT SUM(pu.QUANTITY*pu.SHIPPING_COST) AS CA FROM CUSTOMER c, PURCHASE_ORDER pu WHERE c.\"STATE\" = ? AND pu.SALES_DATE >= ? AND pu.SALES_DATE <= ? " ;
+        public List turnoverByState(String dateDebut, String dateFin){
+            List result = new ArrayList<>();
             
-            try (   Connection connection = myDataSource.getConnection();
-                    PreparedStatement stmt = connection.prepareStatement(sql);
-                    ResultSet rs = stmt.executeQuery(sql)
-            ) {
+            String sql = "SELECT STATE,SUM((PURCHASE_COST*QUANTITY)+SHIPPING_COST) AS CA FROM CUSTOMER c, PURCHASE_ORDER pu, PRODUCT po WHERE c.CUSTOMER_ID = pu.CUSTOMER_ID AND po.PRODUCT_ID = pu.PRODUCT_ID AND pu.SALES_DATE >= ? AND pu.SALES_DATE <= ? GROUP BY STATE" ;
+            try (Connection connection = myDataSource.getConnection();
+                    PreparedStatement stmt = connection.prepareStatement(sql)) {
+                
                     // Définir la valeur du paramètre
-                    stmt.setString(1, state);
-                    stmt.setDate(2, dateDebut);
-                    stmt.setDate(3, dateFin);
-                    stmt.executeUpdate();
-                    if (rs.next()) {
-                        result = rs.getInt("CA");
+                    stmt.setString(1, dateDebut);
+                    stmt.setString(2, dateFin);
+                    try (ResultSet rs = stmt.executeQuery()) {
+                            while (rs.next()) {
+                                result.add(rs);
+                            }
                     }
 
             }  catch (SQLException ex) {
@@ -331,27 +330,26 @@ public class DAO {
             return result ;
         }
         
-        public Double turnoverByCustomer(int customerID, Date dateDebut, Date dateFin){
-            double result = 0.00 ;
-            String sql = "SELECT SUM(pu.QUANTITY*pu.SHIPPING_COST) AS CA FROM CUSTOMER c, PURCHASE_ORDER pu WHERE c.CUSTOMER_ID = ? AND pu.SALES_DATE >= ? AND pu.SALES_DATE <= ? " ;
+        public List turnoverByCustomer(String dateDebut, String dateFin){
+            List result = new ArrayList<>();
             
-            try (   Connection connection = myDataSource.getConnection();
-                    PreparedStatement stmt = connection.prepareStatement(sql);
-                    ResultSet rs = stmt.executeQuery(sql)
-            ) {
+            String sql = "SELECT NAME,SUM((PURCHASE_COST*QUANTITY)+SHIPPING_COST) AS CA FROM CUSTOMER c, PURCHASE_ORDER pu, PRODUCT po WHERE c.CUSTOMER_ID = pu.CUSTOMER_ID AND po.PRODUCT_ID = pu.PRODUCT_ID AND pu.SALES_DATE >= ? AND pu.SALES_DATE <= ? GROUP BY NAME" ;
+            try (Connection connection = myDataSource.getConnection();
+                    PreparedStatement stmt = connection.prepareStatement(sql)) {
+                
                     // Définir la valeur du paramètre
-                    stmt.setInt(1, customerID);
-                    stmt.setDate(2, dateDebut);
-                    stmt.setDate(3, dateFin);
-                    stmt.executeUpdate();
-                    if (rs.next()) {
-                        result = rs.getInt("CA");
+                    stmt.setString(1, dateDebut);
+                    stmt.setString(2, dateFin);
+                    try (ResultSet rs = stmt.executeQuery()) {
+                            while (rs.next()) {
+                                result.add(rs);
+                            }
                     }
 
             }  catch (SQLException ex) {
                 System.out.println("Erreur : " + ex.getMessage());
             }
             
-            return result ;
+            return result;
         }
 }
