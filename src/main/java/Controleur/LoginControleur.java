@@ -176,7 +176,6 @@ public class LoginControleur extends HttpServlet {
                 String supprimer = request.getParameter("action");
                 pagejsp = "editionCommandes";
                 int idOrder = Integer.parseInt(request.getParameter("idProd"));
-                System.out.println(idOrder);
                 int idClient = Integer.parseInt(session.getAttribute("id").toString());
                 if("supprimerBons".equals(supprimer)){
                     try {                    
@@ -184,6 +183,29 @@ public class LoginControleur extends HttpServlet {
                     } catch (SQLException ex) {
                         Logger.getLogger(LoginControleur.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    
+                    List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
+                    request.setAttribute("bonCommandes", bons);
+                }             
+                
+                request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
+                
+            }else if(actionIs(request,"ajouterBons")){                
+                
+                String supprimer = request.getParameter("action");
+                pagejsp = "editionCommandes";
+                int idClient = Integer.parseInt(session.getAttribute("id").toString());
+                if("supprimerBons".equals(supprimer)){
+                   /* int idOrder = Integer.parseInt(request.getParameter("idProdAjout"));
+                    int pid = Integer.parseInt(request.getParameter("pidAjout"));
+                    int quantite = Integer.parseInt(request.getParameter("quantiteAjout"));
+                    int prixLivraison = Integer.parseInt(request.getParameter("prixLivraisonAjout"));
+                    String dateVentes = request.getParameter("dateVentesAjout");
+                    String dateLivraison = request.getParameter("dateLivraisonAjout");
+                    String nomFournisseur = request.getParameter("nomFournisseurAJout");
+                    OrdersEntity ord
+                    dao.addClientOrder(ord);*/
+                    
                     
                     List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
                     request.setAttribute("bonCommandes", bons);

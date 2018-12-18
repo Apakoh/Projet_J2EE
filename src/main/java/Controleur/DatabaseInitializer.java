@@ -24,12 +24,8 @@ public class DatabaseInitializer implements ServletContextListener {
 
 	@Override
 	public void contextInitialized(ServletContextEvent sce) {
-            try {
-                if (!databaseExists()) {
-                    initializeDatabase();
-                }
-            } catch (DAOException ex) {
-                Logger.getLogger(DatabaseInitializer.class.getName()).log(Level.SEVERE, null, ex);
+            if (!databaseExists()) {
+                initializeDatabase();
             }
 	}
 
@@ -38,7 +34,7 @@ public class DatabaseInitializer implements ServletContextListener {
 
 	}
 
-	private boolean databaseExists() throws DAOException {
+	private boolean databaseExists() {
 		boolean result = false;
 		DAO dao = new DAO(DataSourceFactory.getDataSource());
 		try {
@@ -52,12 +48,6 @@ public class DatabaseInitializer implements ServletContextListener {
 	}
 
 	private void initializeDatabase() {
-		OutputStream nowhere = new OutputStream() {
-			@Override
-			public void write(int b) {
-			}
-		};
-		
 		Logger.getLogger("BDD").log(Level.INFO, "Creating databse from SQL script");
 		try {
 			Connection connection = DataSourceFactory.getDataSource().getConnection();

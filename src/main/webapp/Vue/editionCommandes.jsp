@@ -51,19 +51,19 @@
                             <tr>
                                     <div id="nav">
 
-                                        <td class="d0"> <input name="id" type="text" placeholder="Order ID" /> </td>
+                                        <td class="d0"> <input name="idProdAjout" type="text" placeholder="Order ID" /> </td>
 
-                                        <td class="d1"> <input name="pid" type="text" placeholder="Produit ID" /> </td>
+                                        <td class="d1"> <input name="pidAjout" type="text" placeholder="Produit ID" /> </td>
 
-                                        <td class="d0"> <input name="quantite" type="text" placeholder="Quantite" /> </td>
+                                        <td class="d0"> <input name="quantiteAjout" type="text" placeholder="Quantite" /> </td>
 
-                                        <td class="d1"> <input name="prixLivraison" type="text" placeholder="Prix Livraison" /> </td>
+                                        <td class="d1"> <input name="prixLivraisonAjout" type="text" placeholder="Prix Livraison" /> </td>
 
-                                        <td class="d0"> <input name="dateVentes" type="date" placeholder="Date Ventes" /> </td>
+                                        <td class="d0"> <input name="dateVentesAjout" type="date" placeholder="Date Ventes" /> </td>
 
-                                        <td class="d1"> <input name="dateLivraison" type="date" placeholder="Date Livraison" /> </td>
+                                        <td class="d1"> <input name="dateLivraisonAjout" type="date" placeholder="Date Livraison" /> </td>
 
-                                        <td class="d0"> <input name="nomFournisseur" type="text" placeholder="Nom Fournisseur" /> </td>
+                                        <td class="d0"> <input name="nomFournisseurAjout" type="text" placeholder="Nom Fournisseur" /> </td>
                                         
                                         <td></td>
                                         
