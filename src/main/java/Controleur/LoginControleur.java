@@ -170,7 +170,7 @@ public class LoginControleur extends HttpServlet {
                 
                 request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
                 
-            }else {if(this.connecte==false)
+            }else{
                 request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
             }
     }
