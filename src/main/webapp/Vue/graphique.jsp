@@ -13,6 +13,7 @@
        
       <h2>Statistiques</h2>
       
+      <form method="POST">
       <script language = "JavaScript">
          function drawChart1() {
             // Données du graphique
@@ -80,14 +81,14 @@
      <div id="piechart" style="width: 700px; height: 500px;margin-left: 53%;margin-top: -28%;"></div>
      <div id = "container2" style = "width: 550px; height: 400px; margin-left: 7%;"></div>
      <div>
-         <button name="action" value="deconnexion" class="edition">Consulter mes produits</button>
+         <button name="action" value="consulterProduits" class="edition">Consulter mes produits</button>
      </div>
      <div>
          <button name="action" value="deconnexion" class="deconnexion">Déconnexion</button>
      </div>
      
 
-
+    </form>
    </body>
    
    <style type="text/css">

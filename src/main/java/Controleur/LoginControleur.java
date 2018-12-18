@@ -19,6 +19,7 @@ import SimpleJDBC.DataSourceFactory;
 import SimpleJDBC.DAO;
 import SimpleJDBC.ClientEntity;
 import SimpleJDBC.OrdersEntity;
+import SimpleJDBC.ProductEntity;
 import java.sql.SQLException;
 import javax.servlet.http.HttpSession;
 
@@ -211,6 +212,20 @@ public class LoginControleur extends HttpServlet {
                 
                 request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
                 
+            } else if(actionIs(request,"consulterProduits"))
+            {
+                String choix = request.getParameter("action");
+                pagejsp = "graphique.jsp";
+
+                if("consulterProduits".equals(choix))
+                {
+                    List<ProductEntity> prod = dao.ProductList();
+                    pagejsp="consulterProduits";
+                    request.setAttribute("produits", prod);
+                }
+
+              // On continue vers la page JSP sélectionnée
+              request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
             }else{
                 request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
             }

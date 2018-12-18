@@ -8,71 +8,67 @@
     </head>
     <body>
 
-            <h2 id="banner">Mes produits</h2>
-
-            <form method="POST">
+            <h2 id="banner">Liste des Produits</h2>
                 <div class="recuadro">
                     <div class="contenu">
                         <table>
                             <tr>
                                 <th>ID</th>
-                                <th>Manufacturer ID</th>
+                                <th>Manufactureur ID</th>
                                 <th>Code Produit</th>
                                 <th>Prix</th>
                                 <th>Quantité Disponible</th>
                                 <th>Markup</th>
                                 <th>Disponible</th>
                                 <th>Description</th>
-
                             </tr>
-                            <c:forEach var="bonCommande" items="${bonCommandes}">        
-                                <tr>
-                                    <div id="nav">
+                            <c:forEach var="produit" items="${produits}">
+                                <form method="POST">
+                                    <tr class="nav">
+                                            <td class="d0"> <input name="idProd" type="text" value="${produit.getProductID()}" readonly="readonly" > </td>
 
-                                        <td class="d0"> <input name="id" type="text" value="${bonCommande.getOrderNum()}" /> </td>
+                                            <td class="d1"> <input name="idManu" type="text" value="${produit.getManufacturerID()}" readonly="readonly" > </td>
 
-                                        <td class="d1"> <input name="pid" type="text" value="${bonCommande.getProductID()}" /> </td>
+                                            <td class="d0"> <input name="codeProd" type="text" value="${produit.getProductCode()}" > </td>
 
-                                        <td class="d0"> <input name="quantite" type="text" value="${bonCommande.getQuantite()}" /> </td>
+                                            <td class="d1"> <input name="prix" type="text" value="${produit.getPurchaseCost()}" > </td>
 
-                                        <td class="d1"> <input name="prixLivraison" type="text" value="${bonCommande.getShippingCost()}" /> </td>
+                                            <td class="d0"> <input name="quantite" type="text" value="${produit.getQuantity()}" > </td>
 
-                                        <td class="d0"> <input name="dateVentes" type="date" value="${bonCommande.getSalesDate()}" /> </td>
+                                            <td class="d1"> <input name="markup" type="text" value="${produit.getMarkup()}" > </td>
 
-                                        <td class="d1"> <input name="dateLivraison" type="date" value="${bonCommande.getShippingDate()}" /> </td>
-
-                                        <td class="d0"> <input name="nomFournisseur" type="text" value="${bonCommande.getCompagnyName()}" /> </td>
-                                        
-                                        <td class="d1"> <button class="b0" name="action" value="modifierBons" class="button">Modifier</button> </td>
+                                            <td class="d0"> <input name="disponible" type="text" value="${produit.getAvailable()}" > </td>
                                             
-                                        <td class="d0"> <button class="b0" name="action" value="supprimerBons" class="button">Supprimer</button> </td>
+                                            <td class="d0"> <input name="description" type="text" value="${produit.getDescription()}" > </td>
 
-                                    </div>
-                                </tr>
+                                            <td class="d1"> <button class="b0" name="action" value="modifierBons" class="button">Modifier</button> </td>
+
+                                            <td class="d0"> <button class="b0" name="action" value="supprimerBons" class="button">Supprimer</button> </td>
+
+                                        </div>
+                                    </tr>
+                                </form>
                             </c:forEach>
-                            <tr>
-                                    <div id="nav">
+            <form method="POST">
+                            <tr class="nav">
+                                        <td class="d0"> <input name="idProdAjout" type="text" placeholder="Order ID" > </td>
 
-                                        <td class="d0"> <input name="id" type="text" placeholder="Client ID" /> </td>
+                                        <td class="d1"> <input name="pidAjout" type="text" placeholder="Produit ID" > </td>
 
-                                        <td class="d1"> <input name="pid" type="text" placeholder="Produit ID" /> </td>
+                                        <td class="d0"> <input name="quantiteAjout" type="text" placeholder="Quantite" > </td>
 
-                                        <td class="d0"> <input name="quantite" type="text" placeholder="Quantite" /> </td>
+                                        <td class="d1"> <input name="prixLivraisonAjout" type="text" placeholder="Prix Livraison" > </td>
 
-                                        <td class="d1"> <input name="prixLivraison" type="text" placeholder="Prix Livraison" /> </td>
+                                        <td class="d0"> <input name="dateVentesAjout" type="date" placeholder="Date Ventes" > </td>
 
-                                        <td class="d0"> <input name="dateVentes" type="date" placeholder="Date Ventes" /> </td>
+                                        <td class="d1"> <input name="dateLivraisonAjout" type="date" placeholder="Date Livraison" > </td>
 
-                                        <td class="d1"> <input name="dateLivraison" type="date" placeholder="Date Livraison" /> </td>
-
-                                        <td class="d0"> <input name="nomFournisseur" type="text" placeholder="Nom Fournisseur" /> </td>
+                                        <td class="d0"> <input name="nomFournisseurAjout" type="text" placeholder="Nom Fournisseur" /> </td>
                                         
                                         <td></td>
                                         
                                         <td class="d1"> <button class="b0" name="action" placeholder="ajouterBons" class="button">Ajouter</button> </td>
-
-                                    </div>
-                                </tr>
+                            </tr>
                         </table>
                     </div>
                     
@@ -87,7 +83,7 @@
                         </tr>
                     </table>  
                 </div>
-            </form>
+            </form>  
 
     </body>    
         <style type="text/css">
@@ -136,7 +132,7 @@
         }
 
         .recuadro{
-            width: 90%;
+            width: 80%;
             margin: auto;
             background-color: white;            
             min-width: 50em;
@@ -182,7 +178,7 @@
              padding-bottom: 3%;
         }
         
-        #nav {
+        .nav {
             background-color: #FFFFFF;
             padding: auto;
         }
