@@ -191,33 +191,7 @@ public class LoginControleur extends HttpServlet {
                 
                 request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
                 
-            }else if(actionIs(request,"ajouterBons")){                
-                
-                String ajouter = request.getParameter("action");
-                pagejsp = "editionCommandes";
-                int idClient = Integer.parseInt(session.getAttribute("id").toString());
-                
-                /*if("ajouterBons".equals(ajouter)){
-                        
-                        String dateVentes = request.getParameter("dateVentesAjout");
-                        String dateLivraison = request.getParameter("dateLivraisonAjout");
-                        /*                 
-                        int idOrder = Integer.parseInt(request.getParameter("idProdAjout"));
-                        int pid = Integer.parseInt(request.getParameter("pidAjout"));
-                        int quantite = Integer.parseInt(request.getParameter("quantiteAjout"));
-                        float prixLivraison = Float.parseFloat(request.getParameter("prixLivraisonAjout"));                        
-                        String nomFournisseur = request.getParameter("nomFournisseurAjout");
-                        OrdersEntity ord = new OrdersEntity(idOrder,idClient,pid,quantite,prixLivraison,dateVentes,dateLivraison,nomFournisseur);                        
-                        dao.addClientOrder(ord);
-  
-                }*/       
-                                    
-                List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
-                request.setAttribute("bonCommandes", bons);
-                
-                request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
-                
-            } else if(actionIs(request,"consulterProduits"))
+            }else if(actionIs(request,"consulterProduits"))
             {
                 String choix = request.getParameter("action");
                 pagejsp = "graphique.jsp";
@@ -231,25 +205,6 @@ public class LoginControleur extends HttpServlet {
 
               // On continue vers la page JSP sélectionnée
               request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
-            }else if(actionIs(request,"modifierProduit")){                
-                
-                String modifier = request.getParameter("action");
-                pagejsp = "editionCommandes";
-                int idClient = Integer.parseInt(session.getAttribute("id").toString());
-                if("modifierBons".equals(modifier)){
-                    int id = Integer.parseInt(request.getParameter("idProd"));
-                    int pid = Integer.parseInt(request.getParameter("pid"));
-                    int quantite = Integer.parseInt(request.getParameter("quantite"));
-                    
-                    OrdersEntity oe = new OrdersEntity(id,pid,quantite);
-                    dao.editClientOrder(oe);
-                    
-                    List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
-                    request.setAttribute("bonCommandes", bons);
-                }
-                
-                request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
-                
             }else{
                 request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
             }
