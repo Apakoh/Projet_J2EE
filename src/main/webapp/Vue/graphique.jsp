@@ -75,7 +75,7 @@
       
       
      <div class="header">
-         <h4>Choix de la période : <input id="date" type="date" value="2011-01-01"> - <input id="date" type="date" value="2012-01-01"></h4>
+         <h4>Choix de la période : <input id="date" type="date" value="2011-01-01"> - <input id="date" type="date" value="2012-01-01"></h4><button name="action" value="generer" class="generer">C'est parti!</button>
      </div>
      <div id = "container" style = "width: 550px; height: 400px; margin-left: 80px;"></div>
      <div id="piechart" style="width: 700px; height: 500px;margin-left: 53%;margin-top: -28%;"></div>
@@ -137,6 +137,17 @@
         
      .deconnexion:hover{
           background: #e67e22;
+        }
+        
+     .generer{
+            font:bold 20px Arial;
+            background: #34495e;
+            color: white;
+            width: 190px;
+            height: 50px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px; 
         }
     </style>
 </html>
