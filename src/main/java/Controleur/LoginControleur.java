@@ -19,6 +19,7 @@ import SimpleJDBC.DataSourceFactory;
 import SimpleJDBC.DAO;
 import SimpleJDBC.ClientEntity;
 import SimpleJDBC.OrdersEntity;
+import java.sql.SQLException;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -167,6 +168,26 @@ public class LoginControleur extends HttpServlet {
                     List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
                     request.setAttribute("bonCommandes", bons);
                 }
+                
+                request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
+                
+            }else if(actionIs(request,"supprimerBons")){                
+                
+                String supprimer = request.getParameter("action");
+                pagejsp = "editionCommandes";
+                int idOrder = Integer.parseInt(request.getParameter("idProd"));
+                System.out.println(idOrder);
+                int idClient = Integer.parseInt(session.getAttribute("id").toString());
+                if("supprimerBons".equals(supprimer)){
+                    try {                    
+                        dao.deleteClientOrder(idOrder);
+                    } catch (SQLException ex) {
+                        Logger.getLogger(LoginControleur.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
+                    request.setAttribute("bonCommandes", bons);
+                }             
                 
                 request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
                 

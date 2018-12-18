@@ -82,7 +82,7 @@ public class DAOTest {
 		assertEquals(1, result);
 	}
         
-        	/**
+        /**
 	 * Test of testEditionClient method, of class DAO.
 	 * @throws SimpleJDBC.DAOException
 	 */
@@ -93,6 +93,17 @@ public class DAOTest {
                     int quantite = 1;
                     OrdersEntity order = new OrdersEntity(id,pid,quantite);
                     int result = myDAO.editClientOrder(order);
+		assertEquals(1, result);
+	}
+        
+                	/**
+	 * Test of testSuppressionOrder method, of class DAO.
+	 * @throws SimpleJDBC.DAOException
+	 */
+	@Test
+	public void testSuppressionOrder() throws DAOException, SQLException {
+		    int id = 10398001;
+                    int result = myDAO.deleteClientOrder(id);
 		assertEquals(1, result);
 	}
         

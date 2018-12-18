@@ -27,19 +27,19 @@
                                 <tr>
                                     <div id="nav">
 
-                                        <td class="d0"> <input name="id" type="text" value="${bonCommande.getOrderNum()}" /> </td>
+                                        <td class="d0"> <input name="idProd" type="text" value="${bonCommande.getOrderNum()}" readonly="readonly" /> </td>
 
                                         <td class="d1"> <input name="pid" type="text" value="${bonCommande.getProductID()}" /> </td>
 
                                         <td class="d0"> <input name="quantite" type="text" value="${bonCommande.getQuantite()}" /> </td>
 
-                                        <td class="d1"> <input name="prixLivraison" type="text" value="${bonCommande.getShippingCost()}" /> </td>
+                                        <td class="d1"> <input name="prixLivraison" type="text" value="${bonCommande.getShippingCost()}" readonly="readonly" /> </td>
 
-                                        <td class="d0"> <input name="dateVentes" type="date" value="${bonCommande.getSalesDate()}" /> </td>
+                                        <td class="d0"> <input name="dateVentes" type="date" value="${bonCommande.getSalesDate()}" readonly="readonly" /> </td>
 
-                                        <td class="d1"> <input name="dateLivraison" type="date" value="${bonCommande.getShippingDate()}" /> </td>
+                                        <td class="d1"> <input name="dateLivraison" type="date" value="${bonCommande.getShippingDate()}" readonly="readonly" /> </td>
 
-                                        <td class="d0"> <input name="nomFournisseur" type="text" value="${bonCommande.getCompagnyName()}" /> </td>
+                                        <td class="d0"> <input name="nomFournisseur" type="text" value="${bonCommande.getCompagnyName()}" readonly="readonly" /> </td>
                                         
                                         <td class="d1"> <button class="b0" name="action" value="modifierBons" class="button">Modifier</button> </td>
                                             
@@ -51,7 +51,7 @@
                             <tr>
                                     <div id="nav">
 
-                                        <td class="d0"> <input name="id" type="text" placeholder="Client ID" /> </td>
+                                        <td class="d0"> <input name="id" type="text" placeholder="Order ID" /> </td>
 
                                         <td class="d1"> <input name="pid" type="text" placeholder="Produit ID" /> </td>
 

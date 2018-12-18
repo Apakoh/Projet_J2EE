@@ -179,18 +179,19 @@ public class DAO {
             return 0;
         }
         
-        public void deleteClientOrder(int orderNum) throws SQLException {
+        public int deleteClientOrder(int orderNum) throws SQLException {
             String sql = "DELETE FROM PURCHASE_ORDER WHERE ORDER_NUM = ?";
             try (   Connection connection = myDataSource.getConnection();
                     PreparedStatement stmt = connection.prepareStatement(sql)
             ) {
                     // Définir la valeur du paramètre
                     stmt.setInt(1, orderNum);
-                    stmt.executeUpdate();
+                    return stmt.executeUpdate();
 
             }  catch (SQLException ex) {
                 System.out.println("Erreur : " + ex.getMessage());
             }
+           return 0;
         }
         
         public void addProduct(ProductEntity prod){
