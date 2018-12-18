@@ -7,7 +7,11 @@ import SimpleJDBC.OrdersEntity;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.sql.DataSource;
 import org.hsqldb.cmdline.SqlFile;
 import org.hsqldb.cmdline.SqlToolError;
@@ -96,7 +100,7 @@ public class DAOTest {
 		assertEquals(1, result);
 	}
         
-                	/**
+         /**
 	 * Test of testSuppressionOrder method, of class DAO.
 	 * @throws SimpleJDBC.DAOException
 	 */
@@ -107,6 +111,29 @@ public class DAOTest {
 		assertEquals(1, result);
 	}
         
+        /**
+	 * Test of testAjoutOrder method, of class DAO.
+	 * @throws SimpleJDBC.DAOException
+	 */
+	@Test
+	public void testAjoutOrder() throws DAOException, SQLException, ParseException {
+            
+                int idOrder = 30130;
+                int idClient = 2;
+                int pid = 980025;
+                int quantite = 222;
+                float prixLivraison = (float) 3.0;
+                //String dateVentes = "2018-12-01";
+                DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = (Date)formatter.parse("29/11/2011");
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                String mydate = dateFormat.format(date);
+                String nomFournisseur = "Coucou";                
+                String dateLivraison = "2018-12-01";
+                OrdersEntity ord = new OrdersEntity(idOrder,idClient,pid,quantite,prixLivraison,mydate,dateLivraison,nomFournisseur);
+                int result = myDAO.addClientOrder(ord); 
+		assertEquals(1, result);
+	}
         
         public static DataSource getDataSource() {
             org.hsqldb.jdbc.JDBCDataSource ds = new org.hsqldb.jdbc.JDBCDataSource();

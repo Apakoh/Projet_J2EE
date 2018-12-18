@@ -123,8 +123,8 @@ public class DAO {
                                 int productID = rs.getInt("PRODUCT_ID");
                                 int quantite =rs.getInt("QUANTITY") ;
                                 float shippingCost = rs.getFloat("SHIPPING_COST");
-                                Date salesDate = rs.getDate("SALES_DATE");
-                                Date shippingDate = rs.getDate("SHIPPING_DATE");
+                                String salesDate = rs.getString("SALES_DATE");
+                                String shippingDate = rs.getString("SHIPPING_DATE");
                                 String compagnyName = rs.getString("FREIGHT_COMPANY");
                                 // On crée l'objet entité
                                 OrdersEntity c = new OrdersEntity(orderNum, customerID, productID, quantite, shippingCost, salesDate, shippingDate, compagnyName);
@@ -140,25 +140,28 @@ public class DAO {
             return result;
 	}
         
-        public void addClientOrder(OrdersEntity ord){
-            String sql = "INSERT INTO PURCHASE_ORDER (CUSTOMER_ID,PRODUCT_ID,QUANTITY,SHIPPING_COST,SALES_DATE,SHIPPING_DATE,FREIGHT_COMPANY) VALUES (?,?,?,?,?,?,?)";
+        public int addClientOrder(OrdersEntity ord){
+            String sql = "INSERT INTO PURCHASE_ORDER (ORDER_NUM,CUSTOMER_ID,PRODUCT_ID,QUANTITY,SHIPPING_COST,SALES_DATE,SHIPPING_DATE,FREIGHT_COMPANY) VALUES (?,?,?,?,?,?,?,?)";
             try (   Connection connection = myDataSource.getConnection();
                     PreparedStatement stmt = connection.prepareStatement(sql)
             ) {
                 
                     // Définir la valeur du paramètre
-                    stmt.setInt(1, ord.getCustomerID());
-                    stmt.setInt(2, ord.getProductID());
-                    stmt.setInt(3, ord.getQuantite());
-                    stmt.setFloat(4, ord.getShippingCost());
-                    stmt.setDate(5, ord.getSalesDate());
-                    stmt.setDate(6, ord.getShippingDate());
-                    stmt.setString(7, ord.getCompagnyName());
-                    stmt.executeUpdate();
+                    stmt.setInt(1,ord.getOrderNum());
+                    stmt.setInt(2, ord.getCustomerID());
+                    stmt.setInt(3, ord.getProductID());
+                    stmt.setInt(4, ord.getQuantite());
+                    stmt.setFloat(5, ord.getShippingCost());
+                    stmt.setString(6, ord.getSalesDate());
+                    stmt.setString(7, ord.getShippingDate());
+                    stmt.setString(8, ord.getCompagnyName());
+                    return stmt.executeUpdate();
 
             }  catch (SQLException ex) {
                 System.out.println("Erreur : " + ex.getMessage());
-            }   
+            } 
+            
+            return 0;
         }
         
         public int editClientOrder(OrdersEntity ord){

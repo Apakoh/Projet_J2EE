@@ -13,11 +13,11 @@ public class OrdersEntity {
     private int productID;
     private int quantite;
     private float shippingCost;
-    private Date salesDate;
-    private Date shippingDate;
+    private String salesDate;
+    private String shippingDate;
     private String compagnyName;
     
-    public OrdersEntity(int orderNum, int customerID, int productID, int quantite, float shippingCost, Date salesDate, Date shippingDate, String compagnyName){
+    public OrdersEntity(int orderNum, int customerID, int productID, int quantite, float shippingCost, String salesDate, String shippingDate, String compagnyName){
         this.orderNum = orderNum ;
         this.customerID = customerID ;
         this.productID = productID ;
@@ -28,7 +28,7 @@ public class OrdersEntity {
         this.compagnyName = compagnyName;
     }
     
-    public OrdersEntity(int customerID, int productID, int quantite, float shippingCost, Date salesDate, Date shippingDate, String compagnyName){
+    public OrdersEntity(int customerID, int productID, int quantite, float shippingCost, String salesDate, String shippingDate, String compagnyName){
         this.customerID = customerID ;
         this.productID = productID ;
         this.quantite = quantite;
@@ -64,11 +64,11 @@ public class OrdersEntity {
         return shippingCost;
     }
 
-    public Date getSalesDate() {
+    public String getSalesDate() {
         return salesDate;
     }
 
-    public Date getShippingDate() {
+    public String getShippingDate() {
         return shippingDate;
     }
 
@@ -96,11 +96,11 @@ public class OrdersEntity {
         this.shippingCost = shippingCost;
     }
 
-    public void setSalesDate(Date salesDate) {
+    public void setSalesDate(String salesDate) {
         this.salesDate = salesDate;
     }
 
-    public void setShippingDate(Date shippingDate) {
+    public void setShippingDate(String shippingDate) {
         this.shippingDate = shippingDate;
     }
 

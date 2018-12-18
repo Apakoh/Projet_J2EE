@@ -9,8 +9,6 @@
     <body>
 
             <h2 id="banner">Mes bons de commandes</h2>
-
-            <form method="POST">
                 <div class="recuadro">
                     <div class="contenu">
                         <table>
@@ -23,54 +21,51 @@
                                 <th>Livraison</th>
                                 <th>Fournisseur</th>
                             </tr>
-                            <c:forEach var="bonCommande" items="${bonCommandes}">        
-                                <tr>
-                                    <div id="nav">
+                            <c:forEach var="bonCommande" items="${bonCommandes}">
+                                <form method="POST">
+                                    <tr class="nav">
+                                            <td class="d0"> <input name="idProd" type="text" value="${bonCommande.getOrderNum()}" readonly="readonly" /> </td>
 
-                                        <td class="d0"> <input name="idProd" type="text" value="${bonCommande.getOrderNum()}" readonly="readonly" /> </td>
+                                            <td class="d1"> <input name="pid" type="text" value="${bonCommande.getProductID()}" /> </td>
 
-                                        <td class="d1"> <input name="pid" type="text" value="${bonCommande.getProductID()}" /> </td>
+                                            <td class="d0"> <input name="quantite" type="text" value="${bonCommande.getQuantite()}" /> </td>
 
-                                        <td class="d0"> <input name="quantite" type="text" value="${bonCommande.getQuantite()}" /> </td>
+                                            <td class="d1"> <input name="prixLivraison" type="text" value="${bonCommande.getShippingCost()}" readonly="readonly" /> </td>
 
-                                        <td class="d1"> <input name="prixLivraison" type="text" value="${bonCommande.getShippingCost()}" readonly="readonly" /> </td>
+                                            <td class="d0"> <input name="dateVentes" type="date" value="${bonCommande.getSalesDate()}" readonly="readonly" /> </td>
 
-                                        <td class="d0"> <input name="dateVentes" type="date" value="${bonCommande.getSalesDate()}" readonly="readonly" /> </td>
+                                            <td class="d1"> <input name="dateLivraison" type="date" value="${bonCommande.getShippingDate()}" readonly="readonly" /> </td>
 
-                                        <td class="d1"> <input name="dateLivraison" type="date" value="${bonCommande.getShippingDate()}" readonly="readonly" /> </td>
+                                            <td class="d0"> <input name="nomFournisseur" type="text" value="${bonCommande.getCompagnyName()}" readonly="readonly" /> </td>
 
-                                        <td class="d0"> <input name="nomFournisseur" type="text" value="${bonCommande.getCompagnyName()}" readonly="readonly" /> </td>
-                                        
-                                        <td class="d1"> <button class="b0" name="action" value="modifierBons" class="button">Modifier</button> </td>
-                                            
-                                        <td class="d0"> <button class="b0" name="action" value="supprimerBons" class="button">Supprimer</button> </td>
+                                            <td class="d1"> <button class="b0" name="action" value="modifierBons" class="button">Modifier</button> </td>
 
-                                    </div>
-                                </tr>
+                                            <td class="d0"> <button class="b0" name="action" value="supprimerBons" class="button">Supprimer</button> </td>
+
+                                        </div>
+                                    </tr>
+                                </form>
                             </c:forEach>
-                            <tr>
-                                    <div id="nav">
+            <form method="POST">
+                            <tr class="nav">
+                                        <td class="d0"> <input name="idProdAjout" type="text" placeholder="Order ID" > </td>
 
-                                        <td class="d0"> <input name="idProdAjout" type="text" placeholder="Order ID" /> </td>
+                                        <td class="d1"> <input name="pidAjout" type="text" placeholder="Produit ID" > </td>
 
-                                        <td class="d1"> <input name="pidAjout" type="text" placeholder="Produit ID" /> </td>
+                                        <td class="d0"> <input name="quantiteAjout" type="text" placeholder="Quantite" > </td>
 
-                                        <td class="d0"> <input name="quantiteAjout" type="text" placeholder="Quantite" /> </td>
+                                        <td class="d1"> <input name="prixLivraisonAjout" type="text" placeholder="Prix Livraison" > </td>
 
-                                        <td class="d1"> <input name="prixLivraisonAjout" type="text" placeholder="Prix Livraison" /> </td>
+                                        <td class="d0"> <input name="dateVentesAjout" type="date" placeholder="Date Ventes" > </td>
 
-                                        <td class="d0"> <input name="dateVentesAjout" type="date" placeholder="Date Ventes" /> </td>
-
-                                        <td class="d1"> <input name="dateLivraisonAjout" type="date" placeholder="Date Livraison" /> </td>
+                                        <td class="d1"> <input name="dateLivraisonAjout" type="date" placeholder="Date Livraison" > </td>
 
                                         <td class="d0"> <input name="nomFournisseurAjout" type="text" placeholder="Nom Fournisseur" /> </td>
                                         
                                         <td></td>
                                         
                                         <td class="d1"> <button class="b0" name="action" placeholder="ajouterBons" class="button">Ajouter</button> </td>
-
-                                    </div>
-                                </tr>
+                            </tr>
                         </table>
                     </div>
                     
@@ -85,7 +80,7 @@
                         </tr>
                     </table>  
                 </div>
-            </form>
+            </form>  
 
     </body>    
         <style type="text/css">
@@ -180,7 +175,7 @@
              padding-bottom: 3%;
         }
         
-        #nav {
+        .nav {
             background-color: #FFFFFF;
             padding: auto;
         }

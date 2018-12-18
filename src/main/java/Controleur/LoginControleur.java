@@ -29,9 +29,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginControleur", urlPatterns = {"/LoginControleur"})
 public class LoginControleur extends HttpServlet {
     
-    
-    private boolean connecte = false;
-
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -53,7 +50,6 @@ public class LoginControleur extends HttpServlet {
 
             if(actionIs(request,"login"))
             {
-                this.connecte = true;
                 String identifiant = request.getParameter("identifiant");
                 String motDePasse = request.getParameter("motDePasse");
                 String action = request.getParameter("action");
@@ -148,7 +144,6 @@ public class LoginControleur extends HttpServlet {
                 request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
                 
             }else if(actionIs(request,"deconnexion")){                
-                this.connecte = false;
                 session.invalidate();
                 request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
                 
@@ -158,7 +153,7 @@ public class LoginControleur extends HttpServlet {
                 pagejsp = "editionCommandes";
                 int idClient = Integer.parseInt(session.getAttribute("id").toString());
                 if("modifierBons".equals(modifier)){
-                    int id = Integer.parseInt(request.getParameter("id"));
+                    int id = Integer.parseInt(request.getParameter("idProd"));
                     int pid = Integer.parseInt(request.getParameter("pid"));
                     int quantite = Integer.parseInt(request.getParameter("quantite"));
                     
@@ -192,24 +187,27 @@ public class LoginControleur extends HttpServlet {
                 
             }else if(actionIs(request,"ajouterBons")){                
                 
-                String supprimer = request.getParameter("action");
+                String ajouter = request.getParameter("action");
                 pagejsp = "editionCommandes";
                 int idClient = Integer.parseInt(session.getAttribute("id").toString());
-                if("supprimerBons".equals(supprimer)){
-                   /* int idOrder = Integer.parseInt(request.getParameter("idProdAjout"));
-                    int pid = Integer.parseInt(request.getParameter("pidAjout"));
-                    int quantite = Integer.parseInt(request.getParameter("quantiteAjout"));
-                    int prixLivraison = Integer.parseInt(request.getParameter("prixLivraisonAjout"));
-                    String dateVentes = request.getParameter("dateVentesAjout");
-                    String dateLivraison = request.getParameter("dateLivraisonAjout");
-                    String nomFournisseur = request.getParameter("nomFournisseurAJout");
-                    OrdersEntity ord
-                    dao.addClientOrder(ord);*/
-                    
-                    
-                    List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
-                    request.setAttribute("bonCommandes", bons);
-                }             
+                
+                /*if("ajouterBons".equals(ajouter)){
+                        
+                        String dateVentes = request.getParameter("dateVentesAjout");
+                        String dateLivraison = request.getParameter("dateLivraisonAjout");
+                        /*                 
+                        int idOrder = Integer.parseInt(request.getParameter("idProdAjout"));
+                        int pid = Integer.parseInt(request.getParameter("pidAjout"));
+                        int quantite = Integer.parseInt(request.getParameter("quantiteAjout"));
+                        float prixLivraison = Float.parseFloat(request.getParameter("prixLivraisonAjout"));                        
+                        String nomFournisseur = request.getParameter("nomFournisseurAjout");
+                        OrdersEntity ord = new OrdersEntity(idOrder,idClient,pid,quantite,prixLivraison,dateVentes,dateLivraison,nomFournisseur);                        
+                        dao.addClientOrder(ord);
+  
+                }*/       
+                                    
+                List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
+                request.setAttribute("bonCommandes", bons);
                 
                 request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
                 
