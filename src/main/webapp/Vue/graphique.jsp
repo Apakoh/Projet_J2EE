@@ -43,7 +43,8 @@
               ['NY',7]
             ]);
 
-            var options = { title: 'Chiffre d\'affaire par zone géographique'};
+            var options = { title: 'Chiffre d\'affaire par zone géographique',
+                            is3D:true };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
             chart.draw(data, options);
