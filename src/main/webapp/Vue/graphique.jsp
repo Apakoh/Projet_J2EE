@@ -76,10 +76,13 @@
          <h4>Choix de la période : <input id="date" type="date" value="2011-01-01"> - <input id="date" type="date" value="2012-01-01"></h4>
      </div>
      <div id = "container" style = "width: 550px; height: 400px; margin-left: 80px;"></div>
-     <div id="piechart" style="width: 900px; height: 500px;margin-left: 50%;margin-top: -28%;"></div>
+     <div id="piechart" style="width: 700px; height: 500px;margin-left: 53%;margin-top: -28%;"></div>
      <div id = "container2" style = "width: 550px; height: 400px; margin-left: 7%;"></div>
-     <div class="bouton">
+     <div>
          <button name="action" value="deconnexion" class="edition">Consulter mes produits</button>
+     </div>
+     <div>
+         <button name="action" value="deconnexion" class="deconnexion">Déconnexion</button>
      </div>
      
 
@@ -110,10 +113,27 @@
             cursor: pointer;
             border-radius: 10px;
             margin-left: 63%;
-            margin-top: -20%;
+            margin-top: -27%;
         }
         
      .edition:hover{
+          background: #e67e22;
+        }
+        
+     .deconnexion{
+            font:bold 20px Arial;
+            background: #34495e;
+            color: white;
+            width: 300px;
+            height: 115px;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-left: 63%;
+            margin-top: -15%;
+        }
+        
+     .deconnexion:hover{
           background: #e67e22;
         }
     </style>
