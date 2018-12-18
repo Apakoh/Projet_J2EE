@@ -144,6 +144,11 @@ public class LoginControleur extends HttpServlet {
                 pagejsp = "choixClient";
                 request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
                 
+            }else if(actionIs(request,"retourGraphique")){
+                
+                pagejsp = "graphique";
+                request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
+                
             }else if(actionIs(request,"deconnexion")){                
                 session.invalidate();
                 request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
@@ -226,6 +231,25 @@ public class LoginControleur extends HttpServlet {
 
               // On continue vers la page JSP sélectionnée
               request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
+            }else if(actionIs(request,"modifierProduit")){                
+                
+                String modifier = request.getParameter("action");
+                pagejsp = "editionCommandes";
+                int idClient = Integer.parseInt(session.getAttribute("id").toString());
+                if("modifierBons".equals(modifier)){
+                    int id = Integer.parseInt(request.getParameter("idProd"));
+                    int pid = Integer.parseInt(request.getParameter("pid"));
+                    int quantite = Integer.parseInt(request.getParameter("quantite"));
+                    
+                    OrdersEntity oe = new OrdersEntity(id,pid,quantite);
+                    dao.editClientOrder(oe);
+                    
+                    List<OrdersEntity> bons = dao.OrdersListByCustomer(idClient);
+                    request.setAttribute("bonCommandes", bons);
+                }
+                
+                request.getRequestDispatcher("Vue/"+pagejsp+".jsp").forward(request, response);
+                
             }else{
                 request.getRequestDispatcher("Vue/login.jsp").forward(request, response);
             }

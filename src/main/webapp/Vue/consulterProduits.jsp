@@ -41,9 +41,9 @@
                                             
                                             <td class="d0"> <input name="description" type="text" value="${produit.getDescription()}" > </td>
 
-                                            <td class="d1"> <button class="b0" name="action" value="modifierBons" class="button">Modifier</button> </td>
+                                            <td class="d1"> <button class="b0" name="action" value="modifierProd" class="button">Modifier</button> </td>
 
-                                            <td class="d0"> <button class="b0" name="action" value="supprimerBons" class="button">Supprimer</button> </td>
+                                            <td class="d0"> <button class="b0" name="action" value="supprimerProd" class="button">Supprimer</button> </td>
 
                                         </div>
                                     </tr>
@@ -51,23 +51,25 @@
                             </c:forEach>
             <form method="POST">
                             <tr class="nav">
-                                        <td class="d0"> <input name="idProdAjout" type="text" placeholder="Order ID" > </td>
+                                        <td class="d0"> <input name="idProdAjout" type="text" placeholder="Produit ID" > </td>
 
-                                        <td class="d1"> <input name="pidAjout" type="text" placeholder="Produit ID" > </td>
+                                        <td class="d1"> <input name="idManuAjout" type="text" placeholder="Manufactureur ID" > </td>
 
-                                        <td class="d0"> <input name="quantiteAjout" type="text" placeholder="Quantite" > </td>
+                                        <td class="d0"> <input name="codeProdAjout" type="text" placeholder="Quantite" > </td>
 
-                                        <td class="d1"> <input name="prixLivraisonAjout" type="text" placeholder="Prix Livraison" > </td>
+                                        <td class="d1"> <input name="prixAjout" type="text" placeholder="Prix" > </td>
 
-                                        <td class="d0"> <input name="dateVentesAjout" type="date" placeholder="Date Ventes" > </td>
+                                        <td class="d0"> <input name="quantiteAjout" type="date" placeholder="Quantite disponible" > </td>
 
-                                        <td class="d1"> <input name="dateLivraisonAjout" type="date" placeholder="Date Livraison" > </td>
+                                        <td class="d1"> <input name="markupAjout" type="date" placeholder="Markup" > </td>
 
-                                        <td class="d0"> <input name="nomFournisseurAjout" type="text" placeholder="Nom Fournisseur" /> </td>
+                                        <td class="d0"> <input name="disponibleAjout" type="text" placeholder="Diponibilité" > </td>
+                                        
+                                        <td class="d0"> <input name="descriptionAjout" type="text" placeholder="Description" > </td>
                                         
                                         <td></td>
                                         
-                                        <td class="d1"> <button class="b0" name="action" placeholder="ajouterBons" class="button">Ajouter</button> </td>
+                                        <td class="d1"> <button class="b0" name="action" placeholder="ajouterProd" class="button">Ajouter</button> </td>
                             </tr>
                         </table>
                     </div>
@@ -75,7 +77,7 @@
                     <table>
                         <tr>
                             <td>
-                                <button class="b1" name="action" value="retourChoix" class="button">Retour</button>   
+                                <button class="b1" name="action" value="retourGraphique" class="button">Retour</button>   
                             </td>
                             <td>
                                 <button class="b1" name="action" value="deconnexion" class="button">Déconnexion</button> 
