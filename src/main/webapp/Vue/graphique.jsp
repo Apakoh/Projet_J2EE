@@ -72,12 +72,16 @@
       </script>
       
       
+     <div class="header">
+         <h4>Choix de la période : <input id="date" type="date" value="2011-01-01"> - <input id="date" type="date" value="2012-01-01"></h4>
+     </div>
      <div id = "container" style = "width: 550px; height: 400px; margin-left: 80px;"></div>
-     <div id="piechart" style="width: 900px; height: 500px;margin-left: 50%;margin-top: -30%;"></div>
+     <div id="piechart" style="width: 900px; height: 500px;margin-left: 50%;margin-top: -28%;"></div>
      <div id = "container2" style = "width: 550px; height: 400px; margin-left: 7%;"></div>
      <div class="bouton">
          <button name="action" value="deconnexion" class="edition">Consulter mes produits</button>
      </div>
+     
 
 
    </body>
@@ -89,6 +93,12 @@
           font-size: 50px;
           text-align: center;
         }
+        
+        .header{
+            width: 100%;
+            text-align: center;
+        }  
+        
         
     .edition{
             font:bold 20px Arial;
